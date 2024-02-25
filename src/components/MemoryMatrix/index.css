@@ -42,7 +42,7 @@
   background-color: yellow;
 }
 .highlight.button {
-  background-color: yellow;
+  background-color: rgb(226, 226, 14);
 }
 .game-rules-container {
   display: flex;

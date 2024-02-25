@@ -1,16 +1,16 @@
 import {Component} from 'react'
 import {FaArrowLeft} from 'react-icons/fa'
-
 import RulesModal from '../RulesModel'
-
 import './index.css'
 
 class MemoryMatrix extends Component {
-  state = {highlightedIndices: [], isModelOpen: false}
+  state = {
+    highlightedIndices: [],
+  }
 
   componentDidMount() {
     this.getGridButtons()
-    this.intervalId = setInterval(this.getGridButtons, 3000)
+    this.intervalId = setInterval(this.getGridButtons, 6000)
   }
 
   componentWillUnmount() {
@@ -19,7 +19,6 @@ class MemoryMatrix extends Component {
 
   getGridButtons = () => {
     const myArray = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    console.log(myArray)
     const sortedArray = myArray.sort(() => Math.random() - 0.5)
     const slicedArray = sortedArray.slice(0, 3)
     this.setState({highlightedIndices: slicedArray})
@@ -31,8 +30,20 @@ class MemoryMatrix extends Component {
     }))
   }
 
+  onClickCell = index => {
+    const {highlightedIndices} = this.state
+    if (highlightedIndices.includes(index)) {
+      console.log('matched')
+    } else {
+      console.log('not matched')
+    }
+  }
+
+  nextLevel = () => {}
+
   render() {
     const {highlightedIndices, isModelOpen} = this.state
+
     return (
       <div className="memory-matrix-container">
         <div className="game-rules-container">
@@ -62,6 +73,7 @@ class MemoryMatrix extends Component {
               className={`button ${
                 highlightedIndices.includes(index + 1) ? 'highlight' : ''
               }`}
+              onClick={() => this.onClickCell(index)}
             >
               {_}
             </button>
